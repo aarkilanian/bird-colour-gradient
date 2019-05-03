@@ -1,0 +1,3 @@
+REPORTS folder
+Contains RMarkdown files that document the analysis or
+report on results.
