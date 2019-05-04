@@ -38,5 +38,29 @@ final <- as.data.frame(rbind(
 ## Summarize counts
 final <- count(final, V1:V2)
 
-final <- cbind(str_split_fixed(final$`V1:V2`, ":", n = 2), final$n)
+final <- as.data.frame(cbind(str_split_fixed(final$`V1:V2`, ":", n = 2), count = as.numeric(final$n)))
+names(final) = c("site", "species", "count")
 
+## Calculating relative abundances
+
+rel.abnundance <- final %>%
+  group_by(site) %>%
+  summarise(site.abundance = n())
+
+final <- final %>%
+  left_join(rel.abnundance)
+
+final$count <- as.numeric(final$count)
+
+final$rel.abundance <- final$count / final$site.abundance
+
+## Remove family names that are alone
+
+final$keep <- logical(length = length(final[,1]))
+for (i in 1:length(final[,1])){
+  final$keep[i] <- ifelse(length(unlist(str_split(final$species[i], " "))) < 2, FALSE, TRUE)
+}
+
+final <- subset(final, final$keep)
+
+write.csv("data/abundances.csv")
