@@ -34,3 +34,9 @@ final <- as.data.frame(rbind(
   cbind(as.character(locations$parks[16]), saguaro$scientific_name),
   cbind(as.character(locations$parks[17]), big.bend$scientific_name)
 ))
+
+## Summarize counts
+final <- count(final, V1:V2)
+
+final <- cbind(str_split_fixed(final$`V1:V2`, ":", n = 2), final$n)
+
