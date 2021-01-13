@@ -1,6 +1,4 @@
 # bird-colour-gradient :bird: :rainbow: :deciduous_tree:
-Data-driven Ecological Synthesis project on bird colour change across a vegetation gradient
+Collection of scripts for a simple analysis of bird colour change across a latidunal gradient of national parks.
 
-Alex Arkilanian
-Gwladys
-Élodie :)
+Contributor: Gwladys Ã‰lodie
